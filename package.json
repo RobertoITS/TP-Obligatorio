@@ -1,0 +1,32 @@
+{
+  "name": "tp-obligatorio",
+  "version": "1.0.0",
+  "description": "Creacion de una api-rest para Laboratorio I, trabajo practico obligatorio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node --presets=@babel/preset-env",
+    "dev": "nodemon --exec npm run babel-node src/index.js"
+  },
+  "author": "Roberto Aqueveque",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/preset-env": "^7.19.3",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "promise-mysql": "^5.2.0"
+  }
+}
