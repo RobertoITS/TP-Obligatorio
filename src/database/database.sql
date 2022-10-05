@@ -19,10 +19,12 @@ CREATE TABLE users(
 /* TABLA DE TRANSACCIONES */
 CREATE TABLE transactions(
     id_transaction int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    source_ varchar(20) NOT NULL,
-    destiny varchar(20) NOT NULL,
+    source_ int(10) NOT NULL,
+    destiny int(10) NOT NULL,
     quantity int(50) NOT NULL,
-    date_ varchar(20) NOT NULL
+    date_ varchar(20) NOT NULL,
+    FOREIGN KEY (source_) REFERENCES users(user_id),
+    FOREIGN KEY (destiny) REFERENCES users(user_id)
 )
 
 /* Modelo para cargar en Postman

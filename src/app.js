@@ -4,6 +4,8 @@ import session from "express-session";
 
 //Routes
 import userRoutes from "./routes/user.routes";
+import transactionRoutes from "./routes/transaction.routes"
+import authRoutes from "./routes/auth.routes"
 /*express framework que nos permite crear un servidor web
 y manejar nuestras rutas a través de peticiones http:
 get, post, put y delete
@@ -28,6 +30,6 @@ app.use(session({
 
 
 //le indicamos las rutas
-app.use(userRoutes);
+app.use(userRoutes, transactionRoutes, authRoutes);
 
 export default app;
