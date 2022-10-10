@@ -6,7 +6,7 @@ CREATE TABLE users(
     last_name varchar(20) DEFAULT 'Apellido',
     email varchar(20) DEFAULT 'Email',
     pass varchar(100) NOT NULL,
-    groups varchar(20) NOT NULL,
+    gro_ups varchar(20) NOT NULL, --modificado por Matias, groups es una palabra prohibida en SQL Server
     user_permission varchar(20) NOT NULL,
     is_staff boolean NOT NULL,
     is_active boolean NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE transactions(
     "last_name": "Aqueveque",
     "email": "roberto27111989@gmail.com",
     "pass": "123456",
-    "groups": "logistica",
+    "gro_ups": "logistica",
     "user_permission": "all",
     "is_staff": true,
     "is_active": true,

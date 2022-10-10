@@ -3,7 +3,7 @@ import { connect } from './../database/database';
 import bcryptjs from 'bcryptjs'
 
 //Registramos el usuario
-const registerUser = async (req = request, res = response) => {
+const registerUser = async(req = request, res = response) => {
 
     //Obtenemos los datos desde el body
     const {
@@ -12,7 +12,7 @@ const registerUser = async (req = request, res = response) => {
         last_name,
         email,
         pass,
-        groups,
+        gro_ups,
         user_permission,
         is_staff,
         is_active,
@@ -21,7 +21,7 @@ const registerUser = async (req = request, res = response) => {
 
     //Encriptamos la contraseña
     let passwordHash = bcryptjs.hashSync(pass, 8)
-    //Fecha actual
+        //Fecha actual
     const today = Date.now()
     const date = new Date(today)
     const formattedDate = date.toLocaleDateString()
@@ -33,7 +33,7 @@ const registerUser = async (req = request, res = response) => {
         last_name: last_name,
         email: email,
         pass: passwordHash,
-        groups: groups,
+        gro_ups: gro_ups,
         user_permission: user_permission,
         is_staff: is_staff,
         is_active: is_active,
@@ -65,7 +65,7 @@ const registerUser = async (req = request, res = response) => {
 }
 
 //Obtenemos los usuarios
-const getUsers = async (req = request, res = response) => {
+const getUsers = async(req = request, res = response) => {
     try {
         const connection = await connect
 
@@ -86,7 +86,7 @@ const getUsers = async (req = request, res = response) => {
 }
 
 //Obtenemos un usuario especifico
-const getUser = async (req = request, res = response) => {
+const getUser = async(req = request, res = response) => {
     const user_id = req.params.id
 
     try {
@@ -109,7 +109,7 @@ const getUser = async (req = request, res = response) => {
 }
 
 //Borramos el usuario
-const deleteUser = async (req = request, res = response) => {
+const deleteUser = async(req = request, res = response) => {
     const user_id = req.params.id
     try {
         const connection = await connect
@@ -131,7 +131,7 @@ const deleteUser = async (req = request, res = response) => {
 }
 
 //Agregamos fondos o cambiamos el rol, en su defecto
-const editUser = async (req = request, res = response) => {
+const editUser = async(req = request, res = response) => {
     const user_id = req.params.id
 
     //! Obtenemos el valor actual, antes de modificarlo
@@ -142,28 +142,28 @@ const editUser = async (req = request, res = response) => {
 
     const {
         money,
-        groups
+        gro_ups
     } = req.body
 
-    console.log(money, groups);
+    console.log(money, gro_ups);
 
     let user = null
 
     //Verificamos que tipo de dato van a cambiar
-    if (groups != undefined && money != undefined) { //Ambos datos
+    if (gro_ups != undefined && money != undefined) { //Ambos datos
         user = {
             money: money + dinero[0].money,
-            groups: groups
+            gro_ups: gro_ups
         }
     }
-    if (groups == undefined) { //El rol
+    if (gro_ups == undefined) { //El rol
         user = {
             money: money + dinero[0].money
         }
     }
     if (money == undefined) { //El monto
         user = {
-            groups: groups
+            gro_ups: gro_ups
         }
     }
 
