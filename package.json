@@ -24,6 +24,7 @@
     "babel": "^6.23.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
+    "express-fileupload": "^1.4.0",
     "express-session": "^1.17.3",
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
