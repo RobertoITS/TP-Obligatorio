@@ -71,7 +71,7 @@ const addFunds = async(req = request, res = response) => {
     const { destiny, amount, created_by } = req.body
 
     try {
-        console.log(req.body);
+        console.log(req.body); //!no entra a este log
         const connection = await connect
             // vemos cuanta guita tiene el usuario a quien le mandamos
         const destinyUserMoney = await connection.query('SELECT money FROM users WHERE user_id = ?', destiny)
