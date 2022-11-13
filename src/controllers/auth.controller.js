@@ -3,7 +3,7 @@ import { request, response } from "express"
 import generateJWT from "./../helpers/jwt"
 import bcryptjs from "bcryptjs"
 
-const login = async (req = request, res = response) => {
+const login = async(req = request, res = response) => {
     const { username, pass } = req.body
     try {
         const connection = await connect
@@ -11,22 +11,22 @@ const login = async (req = request, res = response) => {
 
         const validPass = bcryptjs.compareSync(pass, result[0].pass)
 
-        if(!validPass){
+        if (!validPass) {
             return res.status(400).json({
                 ok: false,
                 error: 'Contraseña incorrecta'
             })
-        }else {
+        } else {
             console.log(result);
             //Si existe el usuario, generamos el token
             const token = await generateJWT(result[0].user_id)
             return res.status(200).json({
                 ok: true,
-                token
+                token,
+                result //! agregado 13-11-22
             })
         }
-    }
-    catch (err){
+    } catch (err) {
         return res.status(404).json({
             ok: false,
             error: 'Algo salio mal'
