@@ -7,6 +7,8 @@ const newTransaction = async(req = request, res = response) => {
     //TODO const user_id = req.session.user_id
     const user_id = req.params.id
 
+
+    console.log("aqui");
     //Obtenemos la cuenta de destino y el fondo a transferir
     const { destiny, quantity } = req.body
 
