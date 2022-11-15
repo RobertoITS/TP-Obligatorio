@@ -5,13 +5,11 @@ import { connect } from './../database/database';
 const newTransaction = async(req = request, res = response) => {
     //TODO Esta variable la obtenemos de la autenticacion del usuario
     //TODO const user_id = req.session.user_id
-    const user_id = req.params.id
+    // const user_id = req.params.id
 
-
-    console.log("aqui");
     //Obtenemos la cuenta de destino y el fondo a transferir
-    const { destiny, quantity } = req.body
-
+    const { destiny, quantity, source_ } = req.body
+    const user_id = source_
     try {
         const connection = await connect
 
@@ -104,7 +102,6 @@ const addFunds = async(req = request, res = response) => {
             ok: true,
             result,
             receiver,
-            transmitter,
             message: 'Todo ok'
         })
 
