@@ -84,4 +84,38 @@ const updateFile = async(req = request, res = response) => {
     }
 }
 
-export const methods = { uploadFile, updateFile }
+//* Obtenemos el archivo
+const getFile = async(req = request, res = response) => {
+    const user_id = req.params.id
+    const collection = req.params.collection
+    const connection = await connect
+    const user = await connection.query('SELECT user_id, avatar FROM users WHERE user_id = ?', user_id)
+    if(user.length < 1) { //* Comprobamos que el usuario exista:
+        return res.status(400).json({
+            msg: `No existe el usuario con id: ${user_id}`
+        })
+    } else {
+        const avatar = user[0].avatar
+        try {
+            if (avatar){
+                const imagePath = path.join(__dirname, '../uploads/images', collection, avatar)
+                if(fs.existsSync(imagePath)){
+                    return res.sendFile(imagePath)
+                }
+            }
+        }
+        catch (error) {
+            res.status(500).json({
+                ok:false,
+                msg:error.msg
+            })
+        }
+    }
+
+    res.json({
+        msg: 'Falta place Holder'
+    })
+
+}
+
+export const methods = { uploadFile, updateFile, getFile }

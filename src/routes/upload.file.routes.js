@@ -12,9 +12,13 @@ const router = Router()
 
 //* Cargamos una imagen
 router.post('/api/uploads/:id', filesMethods.uploadFile)
-//*Actualizamos una imagen
+//* Actualizamos una imagen
 router.put('/api/uploads/:collection/:id', [
     check('collection').custom(c => collections.allowedCollection(c, ['users'])) //* Chequeamos las colecciones
 ], methods.updateFile)
+//* Obtenemos la imagen
+router.get('/api/uploads/:collection/:id', [
+    check('collection').custom(c => collections.allowedCollection(c, ['users']))
+], methods.getFile)
 
 export default router
