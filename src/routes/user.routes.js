@@ -1,14 +1,16 @@
-//! En este archivo manejaremos las rutas dedicadas a los usuarios
-import {Router} from "express";
 
-import { methods as usersController} from
-"../controllers/user.controller";
+/**
+ * Las rutas de los usuarios.
+ * Administra, crea, borra, edita usuarios
+ */
+
+import {Router} from "express";
+import { methods as usersController} from "../controllers/user.controller";
 //! Validamos los campos
 import { check } from "express-validator";
 import { validator } from "../middlewares/fields.validator";
 //!La funcion para validar el token:
 import { jwtValidator } from "../middlewares/jwt.validator";
-
 
 //! Creamos un enrutador para manejar las rutas
 const router = Router();
@@ -27,7 +29,7 @@ router.delete("/api/accounts/:id", usersController.deleteUser)
 //* Obtenemos un usuario especifico
 router.get("/api/accounts/:id", usersController.getUser)
 //* Obtenemos todos los usuarios
-router.get("/api/accounts", jwtValidator.validateJWT, usersController.getUsers) //!Veamos si funciona:
+router.get("/api/accounts", jwtValidator.validateJWT, usersController.getUsers)
 //* Editamos ciertos campos de los usuarios
 router.put("/api/accounts/:id", usersController.editUser)
 export default router;

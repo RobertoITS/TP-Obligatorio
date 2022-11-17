@@ -13,7 +13,8 @@ CREATE TABLE users(
     is_superuser boolean NOT NULL,
     last_login varchar(20),
     date_joined varchar(20),
-    money int(20) DEFAULT 0
+    money int(20) DEFAULT 0,
+    avatar varchar(400) 
 )
 
 /* TABLA DE TRANSACCIONES */

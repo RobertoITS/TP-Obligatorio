@@ -3,9 +3,6 @@ import { connect } from './../database/database';
 
 //TODO Si se transfiere sobre el mismo usuario, se pierde el monto...
 const newTransaction = async(req = request, res = response) => {
-    //TODO Esta variable la obtenemos de la autenticacion del usuario
-    //TODO const user_id = req.session.user_id
-    // const user_id = req.params.id
 
     //Obtenemos la cuenta de destino y el fondo a transferir
     const { destiny, quantity, source_ } = req.body
@@ -64,14 +61,12 @@ const newTransaction = async(req = request, res = response) => {
     }
 }
 
-//! Creado el 13/11
 //* Funcion para crear fondos
 const addFunds = async(req = request, res = response) => {
     // tenemos que pasar en el body: para quien, cuanto y quien lo creo
     const { destiny, amount, created_by } = req.body
 
     try {
-        console.log(req.body); //!no entra a este log
         const connection = await connect
             // vemos cuanta guita tiene el usuario a quien le mandamos
         const destinyUserMoney = await connection.query('SELECT money FROM users WHERE user_id = ?', destiny)
@@ -118,10 +113,11 @@ const addFunds = async(req = request, res = response) => {
 
 }
 
+//* Obtenemos todas las transacciones
+//TODO Pasar la info a un PDF
 const getTransactions = async(req = request, res = response) => {
     try {
         const connection = await connect
-
         const result = await connection.query('SELECT * FROM transactions')
 
         res.status(200).json({

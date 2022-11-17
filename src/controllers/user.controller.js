@@ -65,6 +65,7 @@ const registerUser = async(req = request, res = response) => {
 }
 
 //Obtenemos los usuarios
+//TODO Pasar la info a un PDF
 const getUsers = async(req = request, res = response) => {
     try {
         const connection = await connect

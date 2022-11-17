@@ -3,9 +3,9 @@ import {
 } from "dotenv";
 config();
 export default {
-    host: '31.187.76.251',
-    port: '3306',
-    database: 'matidb',
+    host: process.env.HOST,
+    port: process.env.PORT,
+    database: process.env.DATABASE,
     user: 'mati',
-    password: '123456'
+    password: process.env.PASSWORD
 }
