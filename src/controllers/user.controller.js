@@ -137,47 +137,69 @@ const editUser = async(req = request, res = response) => {
 
     //! Obtenemos el valor actual, antes de modificarlo
     const connection = await connect
-    console.log(user);
     const dinero = await connection.query('SELECT money FROM users WHERE user_id = ?', user_id)
 
 
     const {
-        money,
-        gro_ups
+        // money,
+        // gro_ups,
+        //!agregado por mati 22/11/22
+        first_name,
+        last_name,
+        email
+        //! fin agregado por mati 22/11/22
     } = req.body
 
-    console.log(money, gro_ups);
 
-    let user = null
+    let user = {}
 
     //Verificamos que tipo de dato van a cambiar
-    if (gro_ups != undefined && money != undefined) { //Ambos datos
-        user = {
-            money: money + dinero[0].money,
-            gro_ups: gro_ups
-        }
-    }
-    if (gro_ups == undefined) { //El rol
-        user = {
-            money: money + dinero[0].money
-        }
-    }
-    if (money == undefined) { //El monto
-        user = {
-            gro_ups: gro_ups
-        }
+    // if (gro_ups != undefined && money != undefined) { //Ambos datos
+    //     user = {
+    //         money: money + dinero[0].money,
+    //         gro_ups: gro_ups
+    //     }
+    // }
+    // if (gro_ups == undefined) { //El rol
+    //     user = {
+    //         money: money + dinero[0].money
+    //     }
+    // }
+    // if (money == undefined) { //El monto
+    //     user = {
+    //         gro_ups: gro_ups
+    //     }
+    // }
+    //! agregado por mati 22/11/22
+    if (first_name != undefined) {
+        user.first_name = first_name
     }
 
+    if (last_name != undefined) {
+        user.last_name = last_name
+    }
+
+    if (email != undefined) {
+        user.email = email
+    }
+    //!fin agregado por mati 22/11/22
+
+
+
     try {
+        let updatedUser //! creado por matias para retornar usuario ya modificado
         const connection = await connect
-        console.log(user);
-        const dinero = await connection.query('SELECT money FROM users WHERE user_id = ?', user_id)
-        console.log(dinero[0].money);
-        const result = await connection.query('UPDATE users SET ? WHERE user_id = ?', [user, user_id])
+            // const dinero = await connection.query('SELECT money FROM users WHERE user_id = ?', user_id)
+            // console.log(dinero[0].money);
+
+        const result = await connection.query('UPDATE users SET ? WHERE user_id = ?', [user, user_id]).then(async() => {
+            updatedUser = await connection.query('SELECT * FROM users WHERE user_id = ?', user_id)
+        })
+
         return res.status(200).json({
             ok: true,
             result,
-            dinero,
+            updatedUser,
             message: 'Todo ok'
         })
     } catch (err) {
